@@ -9,96 +9,95 @@
 
     <EditText
         android:id="@+id/email_text"
-        android:layout_width="wrap_content"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="이메일을 입력하세요."
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="35dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/pw_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
+        android:hint="비밀번호를 입력하세요."
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="212dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exist_error_textView" />
 
     <EditText
         android:id="@+id/pwagain_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
+        android:hint="한번 더 입력하세요."
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="267dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pw_text" />
 
     <EditText
         android:id="@+id/nickname_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
+        android:hint="닉네임을 입력하세요."
         android:inputType="textPersonName"
-        android:text="nick name"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="364dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwagain_text" />
 
     <Button
         android:id="@+id/check_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:text="check"
-        tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="33dp" />
+        android:onClick="checkEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/email_text"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/register_botton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="100dp"
         android:text="register"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="432dp" />
+        android:onClick="register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_text" />
 
     <TextView
         android:id="@+id/exist_error_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The e-mail address alreay exist."
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="90dp" />
-
-    <TextView
-        android:id="@+id/pw_wrong_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="wrong password"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="320dp" />
-
-    <EditText
-        android:id="@+id/email_check_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <Button
-        android:id="@+id/send_test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="131dp" />
-
-    <TextView
-        android:id="@+id/email_enable_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="passed"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="192dp" />
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="2dp"
+        android:text="이미 가입된 이메일 입니다."
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_text" />
 
 </android.support.constraint.ConstraintLayout>

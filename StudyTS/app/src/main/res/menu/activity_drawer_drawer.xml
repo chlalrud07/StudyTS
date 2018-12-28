@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nev_study"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="학습하기" />
+        <item
+            android:id="@+id/nav_done"
+            android:icon="@android:drawable/ic_input_get"
+            android:title="완료목록" />
+        <item
+            android:id="@+id/nav_community"
+            android:icon="@android:drawable/sym_action_chat"
+            android:title="커뮤니티" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="환경설정" />
+    </group>
+
+</menu>
