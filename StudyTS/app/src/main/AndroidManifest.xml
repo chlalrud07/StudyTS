@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EmptyActivity">
+        <activity android:name=".SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,14 +22,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".UserActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".StudyListActivity" />
+        <activity android:name=".StudyPart1Activity" />
+        <activity android:name=".StudyPart2Activity" />
         <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
+            android:name=".DrawerActivity"
+            android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LearnActivity" />
-        <activity android:name=".SelectSubjectActivity" />
-        <activity android:name=".DoneListActivity"></activity>
+        <activity android:name=".CommunityMainActivity" />
+        <activity android:name=".CommunityWritingActivity" />
+        <activity android:name=".CommunityContentsActivity" />
+        <activity android:name=".DoneActivity" />
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>
