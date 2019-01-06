@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Study.StudyFragment">
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/part1_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:text="part1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/part3_button"
+            app:layout_constraintEnd_toStartOf="@+id/part2_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/part2_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:onClick="part2"
+            android:text="part2"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/part4_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/part1_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/part3_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:onClick="part3"
+            android:text="part3"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/part5_button"
+            app:layout_constraintEnd_toStartOf="@+id/part4_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/part1_button" />
+
+        <Button
+            android:id="@+id/part4_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:onClick="part4"
+            android:text="part4"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/part6_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/part3_button"
+            app:layout_constraintTop_toBottomOf="@+id/part2_button" />
+
+        <Button
+            android:id="@+id/part5_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:onClick="part5"
+            android:text="part5"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/part6_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/part3_button" />
+
+        <Button
+            android:id="@+id/part6_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:onClick="part6"
+            android:text="part6"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/part5_button"
+            app:layout_constraintTop_toBottomOf="@+id/part4_button" />
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

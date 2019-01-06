@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chlal.studyts">
+    package="com.example.chlal.studyts_v001">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,19 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".StudyListActivity" />
-        <activity android:name=".StudyPart1Activity" />
-        <activity android:name=".StudyPart2Activity" />
         <activity
-            android:name=".DrawerActivity"
-            android:label="@string/title_activity_drawer"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CommunityMainActivity" />
-        <activity android:name=".CommunityWritingActivity" />
-        <activity android:name=".CommunityContentsActivity" />
-        <activity android:name=".DoneActivity" />
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".Community.CommunityPostActivity"></activity>
     </application>
 
 </manifest>

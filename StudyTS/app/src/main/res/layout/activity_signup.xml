@@ -9,13 +9,15 @@
 
     <EditText
         android:id="@+id/email_text"
-        android:layout_width="230dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="이메일을 입력하세요."
         android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toStartOf="@+id/check_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,24 +69,22 @@
         android:id="@+id/check_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:text="check"
         android:onClick="checkEmail"
+        android:text="check"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/email_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/register_botton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="100dp"
-        android:onClick="register"
         android:text="register"
+        android:onClick="register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nickname_text" />
@@ -95,8 +95,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="2dp"
-        android:text="이미 가입된 이메일 입니다."
-        android:textSize="10sp"
+        android:inputType="text"
+        android:text="중복체크를 해주시기 바랍니다"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_text" />
 
