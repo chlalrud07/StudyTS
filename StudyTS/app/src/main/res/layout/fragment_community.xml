@@ -6,18 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addtext_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="add"
-        android:src="@drawable/ic_add_black_24dp"
-        app:fabSize="normal"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="415dp"
-        tools:srcCompat="@android:drawable/ic_menu_add" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,6 +16,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addtext_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="50dp"
+            android:clickable="true"
+            android:onClick="add"
+            android:src="@drawable/ic_add_black_24dp"
+            app:fabSize="normal"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="415dp"
+            tools:srcCompat="@android:drawable/ic_menu_add" />
+    </RelativeLayout>
 
 </FrameLayout>

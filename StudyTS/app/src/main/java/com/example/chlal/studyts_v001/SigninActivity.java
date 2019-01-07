@@ -47,8 +47,16 @@ public class SigninActivity extends AppCompatActivity {
         JsonObjectRequest object = new JsonObjectRequest(Request.Method.POST, Constant.SIGN_IN_URL, userInfo, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                try {
+                    if (response.getString("message").equals("Exist")) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "계정을 찾을 수 없습니다.", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
