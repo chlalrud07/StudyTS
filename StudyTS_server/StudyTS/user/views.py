@@ -15,7 +15,7 @@ def signin(request):
         database='StudyTS'
     )
     cursor = myDB.cursor(dictionary=True)
-    cursor.execute('SELECTOR username, password FROM identification')
+    cursor.execute('SELECT username, password FROM identification')
 
     data = json.loads(request.body)
     password = encrypt_password(data['password'])
