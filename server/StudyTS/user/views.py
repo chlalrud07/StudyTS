@@ -15,7 +15,7 @@ def signin(request):
         database='StudyTS'
     )
     cursor = myDB.cursor(dictionary=True)
-    cursor.execute('SELECT username, password FROM identification')
+    cursor.execute('SELECT * FROM identification')
 
     data = json.loads(request.body)
     password = encrypt_password(data['password'])
@@ -23,7 +23,10 @@ def signin(request):
     for row in cursor.fetchall():
         if data['email'] == row['username'] and password == row['password']:
             cursor.close()
-            return JsonResponse({'message':'Exist'})
+            row.pop('password')
+            row.update({'message':'Exist'})
+            return JsonResponse(row)
+
     return JsonResponse({'message':'NotExist'})
 
 
@@ -42,7 +45,7 @@ def signup(request):
     val = (data['email'], encrypt_password(data['password']), int(1), data['nickname'])
     cursor.execute(sql, val)
     myDB.commit()
-    return JsonResponse(request)
+    return JsonResponse({'message':'Success'})
 
 
 @csrf_exempt
