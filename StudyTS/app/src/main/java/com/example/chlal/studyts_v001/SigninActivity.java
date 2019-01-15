@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.chlal.studyts_v001.Study.Part.StudyPart1Activity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +45,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void signUp(View v){
-        Intent intent_signUp = new Intent(getApplicationContext(), SignupActivity.class);
+        Intent intent_signUp = new Intent(getApplicationContext(), StudyPart1Activity.class);
         startActivity(intent_signUp);
     }
 
