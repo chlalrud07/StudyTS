@@ -156,11 +156,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         }
     }
-    private boolean checkValidPassword(String password) {
-        return password.length() < 6;
-    }
-    private boolean isValidEmail(String email) {
-        return email.contains("@") && email.contains(".");
-    }
+    private boolean checkValidPassword(String password) {return password.length() < 6;}
+    private boolean isValidEmail(String email) {return email.contains("@") && email.contains(".");}
 }
 
