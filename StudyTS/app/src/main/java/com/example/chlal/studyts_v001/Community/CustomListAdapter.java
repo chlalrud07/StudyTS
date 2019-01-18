@@ -46,6 +46,9 @@ public class CustomListAdapter extends BaseAdapter {
             postDetail = view.findViewById(R.id.postDetail);
         }
     }
+    public String getPostID(int position) {
+        return this.postArray.get(position).getPid();
+    }
     @Override
     public int getCount() {return postArray.size();}
 

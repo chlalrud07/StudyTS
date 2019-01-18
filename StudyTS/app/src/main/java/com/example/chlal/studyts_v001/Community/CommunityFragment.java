@@ -1,24 +1,18 @@
 package com.example.chlal.studyts_v001.Community;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.chlal.studyts_v001.Constant;
-import com.example.chlal.studyts_v001.MainActivity;
 import com.example.chlal.studyts_v001.R;
-import com.example.chlal.studyts_v001.Study.StudyFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +26,12 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class CommunityFragment extends Fragment {
+    ArrayList<String> postID = new ArrayList<String>();
     ArrayList<String> postTitle = new ArrayList<String>();
     ArrayList<String> postDetail = new ArrayList<String>();
     ListView postListView;
+    CustomListAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_community, container, false);
@@ -42,6 +39,13 @@ public class CommunityFragment extends Fragment {
         connection.execute();
 
         this.postListView = rootView.findViewById(R.id.post_board);
+        postListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                Intent intent = new Intent(getContext(), CommunityPostDetail.class);
+                intent.putExtra("pid", adapter.getPostID(pos));
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
@@ -78,20 +82,22 @@ public class CommunityFragment extends Fragment {
         protected void onPostExecute(JSONArray response) {
             try {
                 for (int i=0; i<response.length(); i++) {
+                    postID.add(response.getJSONObject(i).getString("post_id"));
                     postTitle.add(response.getJSONObject(i).getString("title"));
                     postDetail.add(response.getJSONObject(i).getString("author_id"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            CustomListAdapter adapter = new CustomListAdapter(getContext(), generateItemsList());
+            adapter = new CustomListAdapter(getContext(), generateItemsList());
+            adapter.notifyDataSetChanged();
             postListView.setAdapter(adapter);
         }
     }
     private ArrayList<Post> generateItemsList() {
         ArrayList<Post> posts = new ArrayList<>();
         for (int i = 0; i < postTitle.size(); i++) {
-            posts.add(new Post(postTitle.get(i), postDetail.get(i)));
+            posts.add(new Post(postID.get(i), postTitle.get(i), postDetail.get(i)));
         }
         return posts;
     }

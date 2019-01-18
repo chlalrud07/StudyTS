@@ -2,15 +2,20 @@ package com.example.chlal.studyts_v001.Community;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.chlal.studyts_v001.Constant;
 import com.example.chlal.studyts_v001.R;
+import com.example.chlal.studyts_v001.Study.StudyFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +103,16 @@ public class CommunityPostActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
+            try {
+                if (jsonObject.getString("message").equals("OK")) {
+                    Toast.makeText(getApplicationContext(), "업로드 성공하였습니다.", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "업로드 실패", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             super.onPostExecute(jsonObject);
         }
     }

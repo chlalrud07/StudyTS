@@ -2,6 +2,7 @@ package com.example.chlal.studyts_v001;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +24,9 @@ import com.example.chlal.studyts_v001.Study.StudyFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Fragment fragment = null;
+    Class fragmentClass = StudyFragment.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +85,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass = StudyFragment.class;
-
         int id = item.getItemId();
 
         if (id == R.id.nev_study) {
@@ -112,7 +113,21 @@ public class MainActivity extends AppCompatActivity
 
     public void add(View v){
         Intent intent_post = new Intent(getApplicationContext(), CommunityPostActivity.class);
-        startActivity(intent_post);
+        startActivityForResult(intent_post, Constant.POST_FINISH_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Constant.POST_FINISH_CODE) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            try {
+                fragmentManager.beginTransaction().replace(R.id.fragLayout, CommunityFragment.class.newInstance()).commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void part2(View v){
