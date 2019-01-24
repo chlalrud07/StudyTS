@@ -1,5 +1,6 @@
 package com.example.chlal.studyts_v001;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,8 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        Util.requestPermission(this, Manifest.permission.RECORD_AUDIO);
+        Util.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         ActionBar ab = getSupportActionBar();
         ab.hide();
 

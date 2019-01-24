@@ -15,8 +15,7 @@ import java.util.TimerTask;
 
 public class StudyPart1Activity extends AppCompatActivity {
     TextView timeText;
-    int time = 45;
-    int cnt = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,28 +24,8 @@ public class StudyPart1Activity extends AppCompatActivity {
     }
 
     public void start(View v){
-        mHandler.sendEmptyMessage(0);
+        TimerHandler th = new TimerHandler(45, 45, timeText);
         View b = findViewById(R.id.start_button);
         b.setVisibility(View.INVISIBLE);
     }
-
-    Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            if(time>-1 && cnt > 0){
-                if (time < 10) timeText.setText("00:0" + time);
-                else timeText.setText("00:" + time);
-                mHandler.sendEmptyMessageDelayed(0, 1000);
-                time--;
-            }else {
-                if(cnt == 2){
-                    time = 45;
-                    cnt--;
-                    mHandler.removeMessages(0);
-                    mHandler.sendEmptyMessage(0);
-                }else{
-
-                }
-            }
-        }
-    };
 }
