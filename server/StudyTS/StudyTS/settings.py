@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%j=u1!m47lb=@e!xh0n#pxqlv*=$g%ipqmhuk+z#l5h3a3dc5n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
+    'community',
+    'part1',
+    'part2',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +57,8 @@ ROOT_URLCONF = 'StudyTS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': ['templates'],
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -77,14 +79,13 @@ WSGI_APPLICATION = 'StudyTS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'StudyTS',
+        'NAME':'StudyTS',
         'USER': 'StudyTS',
         'PASSWORD': 'qwer1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
 
 
 # Password validation
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
