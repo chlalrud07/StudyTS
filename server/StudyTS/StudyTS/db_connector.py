@@ -22,4 +22,3 @@ class MysqlConnect:
 
     def commit(self):
         self.connector.commit()
-

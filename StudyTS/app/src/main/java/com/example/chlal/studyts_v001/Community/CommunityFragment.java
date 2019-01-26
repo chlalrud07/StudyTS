@@ -57,7 +57,7 @@ public class CommunityFragment extends Fragment {
         @Override
         protected JSONArray doInBackground(JSONObject[] objects) {
             try {
-                URL url = new URL(Constant.POST_URL);
+                URL url = new URL(Constant.COMMUNITY_INDEX_URL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                 connection.setRequestProperty("Accept", "application/json");
@@ -84,7 +84,7 @@ public class CommunityFragment extends Fragment {
                 for (int i=0; i<response.length(); i++) {
                     postID.add(response.getJSONObject(i).getString("post_id"));
                     postTitle.add(response.getJSONObject(i).getString("title"));
-                    postDetail.add(response.getJSONObject(i).getString("author_id"));
+                    postDetail.add(response.getJSONObject(i).getString("user_id"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

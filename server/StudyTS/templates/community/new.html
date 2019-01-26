@@ -4,17 +4,17 @@
 <div class="container">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-	<div class="form-group">
-            <label>Title</label>
+        <div class="form-group">
+            <label class="form-control-label">Title</label>
             <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
         </div>
         <div class="form-group">
-            <label>File</label>
+            <label class="form-control-label">File</label>
             <input type="file" name="files" class="form-control-file border rounded p-1 border-primary file" multiple="multiple" accept="audio/*">
         </div>
         <div class="form-group">
-            <label>Content</label>
-            <textarea name="title" class="form-control"></textarea>
+            <label class="form-control-label">Content</label>
+            <textarea name="content" class="form-control"></textarea>
         </div>
         <button class="btn form-control" type="submit" style="background-color: #aaddff">저장</button>
     </form>

@@ -1,5 +1,6 @@
 package com.example.chlal.studyts_v001;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -49,8 +50,9 @@ public class SignupActivity extends AppCompatActivity {
         mCheck = findViewById(R.id.check_button);
     }
 
-    public void checkEmail(View v) {
+    public void checkEmail(View v) throws JSONException, IOException {
         if (!isValidEmail(mEmail.getText().toString())) {
+            isAvailable = false;
             Toast.makeText(getApplicationContext(), "이메일 형식이 올바르지 않습니다.", Toast.LENGTH_LONG).show();
             return;
         }
@@ -58,17 +60,32 @@ public class SignupActivity extends AppCompatActivity {
         isAvailable = true;
 
         JSONObject userInfo = new JSONObject();
-        try {
-            userInfo.put("email", mEmail.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        userInfo.put("username", mEmail.getText().toString());
 
-        SignupConnection signupConnection = new SignupConnection(Constant.CHECK_EMAIL_URL, userInfo);
-        signupConnection.execute();
+        @SuppressLint("StaticFieldLeak")
+        JsonConnection signupConnection = new JsonConnection(Constant.CHECK_EMAIL_URL) {
+            @Override
+            protected void onPostExecute(JSONObject jsonObject) {
+                try {
+
+                    if (jsonObject.getString("message").equals("Exist")) {
+                        Toast.makeText(getApplicationContext(), "존재하는 이메일입니다.", Toast.LENGTH_LONG).show();
+                        mCheck.setBackgroundColor(Color.rgb(238, 221, 170));
+                    } else if (jsonObject.getString("message").equals("NotExist")) {
+                        mExist.setText("사용가능한 이메일입니다.");
+                        mCheck.setBackgroundColor(Color.rgb(170, 221, 238));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "에러가 발생했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        signupConnection.execute(userInfo);
     }
 
-    public void register(View v){
+    public void register(View v) throws JSONException, IOException {
         if (checkValidPassword(mPassword.getText().toString())
                 || checkValidPassword(mPasswordConfirm.getText().toString())
                 || !mPassword.getText().toString().equals(mPasswordConfirm.getText().toString())) {
@@ -80,81 +97,28 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         JSONObject userInfo = new JSONObject();
-        try {
-            userInfo.put("email", mEmail.getText().toString());
-            userInfo.put("password", mPassword.getText().toString());
-            userInfo.put("nickname", mNickname.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        SignupConnection signupConnection = new SignupConnection(Constant.SIGN_UP_URL, userInfo);
-        signupConnection.execute();
-    }
+        userInfo.put("username", mEmail.getText().toString());
+        userInfo.put("password", mPassword.getText().toString());
+        userInfo.put("nickname", mNickname.getText().toString());
 
-    private class SignupConnection extends AsyncTask<JSONObject, JSONObject, JSONObject> {
-        private URL url;
-        private JSONObject json;
-        private JSONObject response = null;
-
-        SignupConnection(String url, JSONObject json) {
-            try {
-                this.url = new URL(url);
-                this.json = json;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        @Override
-        protected JSONObject doInBackground(JSONObject... jsonObjects) {
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                connection.setRequestProperty("Accept", "application/json");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
-                connection.connect();
-
-                OutputStream writer = connection.getOutputStream();
-                writer.write(json.toString().getBytes());
-                writer.flush();
-                writer.close();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line = "";
-                StringBuilder buffer = new StringBuilder();
-                while ((line = reader.readLine()) != null) buffer.append(line);
-
-                response = new JSONObject(buffer.toString().trim());
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-        @Override
-        protected void onPostExecute(JSONObject message) {
-            try {
-                System.out.println(message);
-                if (message == null) {
-                    Toast.makeText(getApplicationContext(), "에러가 발생했습니다.", Toast.LENGTH_LONG).show();
-                } else if (message.getString("message").equals("Exist")) {
-                    Toast.makeText(getApplicationContext(), "존재하는 이메일입니다.", Toast.LENGTH_LONG).show();
-                    mCheck.setBackgroundColor(Color.rgb(238, 221, 170));
-                } else if (message.getString("message").equals("NotExist")) {
-                    mExist.setText("사용가능한 이메일입니다.");
-                    mCheck.setBackgroundColor(Color.rgb(170, 221, 238));
-                } else if (message.getString("message").equals("Failed")) {
-                    Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "회원가입에 성공했습니다.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
-                    startActivity(intent);
+        @SuppressLint("StaticFieldLeak") JsonConnection signupConnection = new JsonConnection(Constant.SIGN_UP_URL) {
+            @Override
+            protected void onPostExecute(JSONObject jsonObject) {
+                try {
+                    if (jsonObject == null) {
+                        Toast.makeText(getApplicationContext(), "에러가 발생했습니다.", Toast.LENGTH_LONG).show();
+                    } else if (jsonObject.getString("message").equals("Failed")) {
+                        Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "회원가입에 성공했습니다.", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
+        };
+        signupConnection.execute(userInfo);
     }
     private boolean checkValidPassword(String password) {return password.length() < 6;}
     private boolean isValidEmail(String email) {return email.contains("@") && email.contains(".");}

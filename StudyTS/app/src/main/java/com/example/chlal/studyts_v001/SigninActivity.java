@@ -42,81 +42,47 @@ public class SigninActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.password_text);
 
     }
-    public void signIn(View v) {
-        SigninConnection connection = new SigninConnection();
-        connection.execute();
+    public void signIn(View v) throws IOException, JSONException {
+        JSONObject userInfo = new JSONObject();
+        userInfo.put("username", mEmail.getText().toString());
+        userInfo.put("password", mPassword.getText().toString());
+
+        @SuppressLint("StaticFieldLeak")
+        JsonConnection connection = new JsonConnection(Constant.SIGN_IN_URL) {
+            @Override
+            protected void onPostExecute(JSONObject jsonObject) {
+                try {
+                    System.out.println("                                                                          "+jsonObject);
+                    if (jsonObject == null) {
+                        Toast.makeText(getApplicationContext(), "에러 발생", Toast.LENGTH_LONG).show();
+                    } else if (jsonObject.getString("message").equals("Exist")) {
+                        SharedPreferences.Editor editor = getSharedPreferences("SESSION", MODE_PRIVATE).edit();
+                        editor.putString("username", mEmail.getText().toString());
+                        editor.apply();
+                        Intent intent = new Intent();
+                        if (jsonObject.getString("permission").equals("user")) {
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                        } else {
+                            intent = new Intent(getApplicationContext(), AdminActivity.class);
+                        }
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "해당 계정이 없습니다.", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        connection.execute(userInfo);
     }
 
     public void signUp(View v){
-        Intent intent_signUp = new Intent(getApplicationContext(), StudyPart1Activity.class);
+        Intent intent_signUp = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent_signUp);
     }
 
     public void forgot(View v){ // 비밀번호 찾기 액티비티 아직 안만듦
 
-    }
-    @SuppressLint("StaticFieldLeak")
-    private class SigninConnection extends AsyncTask<JSONObject, JSONObject, JSONObject> {
-
-        @Override
-        protected JSONObject doInBackground(JSONObject[] objects) {
-            JSONObject response = null;
-            HttpURLConnection connection = null;
-            try {
-                JSONObject userInfo = new JSONObject();
-                userInfo.put("email", mEmail.getText().toString());
-                userInfo.put("password", mPassword.getText().toString());
-
-                URL url = new URL(Constant.SIGN_IN_URL);
-
-                connection = (HttpURLConnection) url.openConnection();
-
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestProperty("Accept", "application/json");
-                connection.setRequestMethod("POST");
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-                connection.connect();
-
-                OutputStream writer = connection.getOutputStream();
-                writer.write(userInfo.toString().getBytes());
-                writer.flush();
-                writer.close();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line = "";
-                StringBuilder buffer = new StringBuilder();
-                while ((line = reader.readLine()) != null) buffer.append(line);
-
-                response = new JSONObject(buffer.toString().trim());
-            } catch (JSONException | IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null)
-                    connection.disconnect();
-            }
-            return response;
-        }
-        @Override
-        protected void onPostExecute(JSONObject message) {
-            try {
-                System.out.println(message);
-                if (message == null) {
-                    Toast.makeText(getApplicationContext(), "에러가 발생했습니다.", Toast.LENGTH_LONG).show();
-                } else if (message.getString("message").equals("Exist")) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    SharedPreferences session = getSharedPreferences("Session", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = session.edit();
-                    editor.putString("username", message.getString("username"));
-                    editor.putString("nickname", message.getString("nickname"));
-                    editor.apply();
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "해당 계정이 존재하지 않습니다.\n다시 확인해주십시오!", Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
