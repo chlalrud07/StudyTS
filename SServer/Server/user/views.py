@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib import auth
 
-from StudyTS.db_connector import MysqlConnect
+from Server.db_connector import MysqlConnect
 import json
 
 

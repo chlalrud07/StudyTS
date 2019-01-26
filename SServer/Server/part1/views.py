@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from StudyTS.db_connector import MysqlConnect
+from Server.db_connector import MysqlConnect
+
 
 
 @csrf_exempt

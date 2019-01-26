@@ -35,6 +35,7 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
         Util.requestPermission(this, Manifest.permission.RECORD_AUDIO);
         Util.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Util.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         ActionBar ab = getSupportActionBar();
         ab.hide();
 

@@ -82,9 +82,9 @@ public class CommunityFragment extends Fragment {
         protected void onPostExecute(JSONArray response) {
             try {
                 for (int i=0; i<response.length(); i++) {
-                    postID.add(response.getJSONObject(i).getString("post_id"));
+                    postID.add(response.getJSONObject(i).getString("id"));
                     postTitle.add(response.getJSONObject(i).getString("title"));
-                    postDetail.add(response.getJSONObject(i).getString("user_id"));
+                    postDetail.add(response.getJSONObject(i).getString("author_id"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
